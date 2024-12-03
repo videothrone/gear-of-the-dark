@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRssFeed } from '../hooks/useFetchRSS.js';
 import Card from './Card.jsx';
+import AudioPlayer from './AudioPlayer.jsx';
 
 export default function CardList({
 	limit,
@@ -11,6 +12,21 @@ export default function CardList({
 		'https://gearofthedark.podigee.io/feed/mp3'
 	);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [activeEpisode, setActiveEpisode] = useState(null);
+	const [isPlaying, setIsPlaying] = useState(false);
+
+	const handlePlay = (item) => {
+		setActiveEpisode(item);
+		setIsPlaying(true);
+	};
+
+	const handlePause = () => {
+		setIsPlaying(false);
+	};
+
+	const handleResume = () => {
+		setIsPlaying(true);
+	};
 
 	if (isLoading) {
 		return <div aria-live="polite">Loading...</div>;
@@ -38,10 +54,27 @@ export default function CardList({
 			<ul className="card-list__items">
 				{displayedItems.map((item, index) => (
 					<li key={index} className="card-list__item">
-						<Card item={item} />
+						<Card
+							item={item}
+							onPlay={() => handlePlay(item)}
+							isActive={activeEpisode && activeEpisode.guid === item.guid}
+							isPlaying={
+								isPlaying && activeEpisode && activeEpisode.guid === item.guid
+							}
+						/>
 					</li>
 				))}
 			</ul>
+			{activeEpisode && (
+				<AudioPlayer
+					episode={activeEpisode}
+					onClose={() => setActiveEpisode(null)}
+					autoPlay={true}
+					isPlaying={isPlaying}
+					onPause={handlePause}
+					onPlay={handleResume}
+				/>
+			)}
 			{paginate && (
 				<div className="card-list__pagination">
 					<button
