@@ -1,4 +1,4 @@
-export default function Card({ item }) {
+export default function Card({ item, onPlay, isActive }) {
 	return (
 		<article className="card">
 			<h2 className="card__title">
@@ -20,6 +20,16 @@ export default function Card({ item }) {
 				className="card__description"
 				dangerouslySetInnerHTML={{ __html: item.description }}
 			/>
+			<button
+				className="card__play-button"
+				onClick={onPlay}
+				disabled={isActive}
+				aria-label={
+					isActive ? 'Episode wird gerade abgespielt' : 'Episode abspielen'
+				}
+			>
+				{isActive ? 'Wird abgespielt' : 'Episode abspielen'}
+			</button>
 		</article>
 	);
 }
