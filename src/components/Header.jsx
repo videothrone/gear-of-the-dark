@@ -5,7 +5,7 @@ export default function Header() {
 		<header className="site-header content-padding">
 			<nav className="site-nav">
 				<Link to="/">Home</Link>
-				<Link to="/archiv">Alle Folgen</Link>
+				<Link to="/archive">Alle Episoden</Link>
 				<Link to="/about">Über den Podcast</Link>
 			</nav>
 		</header>

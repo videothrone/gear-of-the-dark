@@ -9,7 +9,7 @@ export default function Router() {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/about" element={<About />} />
-			<Route path="/archiv" element={<Archive />} />
+			<Route path="/archive" element={<Archive />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
