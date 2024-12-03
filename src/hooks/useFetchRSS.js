@@ -19,6 +19,13 @@ export function useRssFeed(url) {
 					link: item.querySelector('link')?.textContent || '',
 					pubDate: item.querySelector('pubDate')?.textContent || '',
 					description: item.querySelector('description')?.textContent || '',
+					guid: item.querySelector('guid')?.textContent || '',
+					enclosure: {
+						url: item.querySelector('enclosure')?.getAttribute('url') || '',
+						type: item.querySelector('enclosure')?.getAttribute('type') || '',
+						length:
+							item.querySelector('enclosure')?.getAttribute('length') || '',
+					},
 				}));
 
 				setFeedItems(feedData);
