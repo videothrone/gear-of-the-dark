@@ -1,7 +1,7 @@
 export default function About() {
 	return (
-		<section className="about">
-			<h1>Über diesen Podcast</h1>
+		<section className="about" aria-labelledby="about__title">
+			<h1 className="about__title">Über diesen Podcast</h1>
 
 			<p>
 				Straight outta Florida und Oregon erzählen die beiden Exil-Kartoffeln
@@ -23,7 +23,7 @@ export default function About() {
 
 			<p>Präsentiert von ESP Guitars.</p>
 
-			<div className="social-links">
+			<div className="about__social-links">
 				<h2>Folgt uns auf:</h2>
 				<ul>
 					<li>
