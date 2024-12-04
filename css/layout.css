@@ -30,6 +30,10 @@ body {
 	gap: 1rem;
 }
 
+.site-logo {
+	margin: 0 auto;
+}
+
 /* Hilfsklassen für einheitliches Layout. */
 
 .content-padding {
