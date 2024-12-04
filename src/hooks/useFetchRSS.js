@@ -26,6 +26,12 @@ export function useRssFeed(url) {
 						length:
 							item.querySelector('enclosure')?.getAttribute('length') || '',
 					},
+					episodeImage:
+						item.querySelector('itunes\\:image')?.getAttribute('href') ||
+						item.querySelector('[href]')?.getAttribute('href') ||
+						'',
+
+					duration: item.querySelector('itunes\\:duration')?.textContent || '',
 				}));
 
 				setFeedItems(feedData);
