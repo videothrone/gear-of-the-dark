@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer';
+/* import Footer from './components/Footer'; */
 import Router from './Router';
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
 				<main className="site-content content-padding">
 					<Router />
 				</main>
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		</BrowserRouter>
 	);
