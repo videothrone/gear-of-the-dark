@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
 	return (
-		<section className="home">
+		<section className="home" aria-labelledby="home__title">
+			<h1 className="home__title h3">Die neuesten Episoden</h1>
 			<CardList limit={9} />
-			<Link to="/archive">Alle Episoden</Link>
+			<Link to="/archive" className="home__link">
+				Alle Episoden
+			</Link>
 		</section>
 	);
 }
