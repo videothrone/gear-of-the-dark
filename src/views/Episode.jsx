@@ -74,15 +74,17 @@ export default function Episode() {
 				</h1>
 			</div>
 
-			{episode.episodeImage && (
-				<div className="episode__image">
-					<img src={episode.episodeImage} alt={`Cover for ${episode.title}`} />
-				</div>
-			)}
+			<div className="episode__image">
+				<img src={episode.episodeImage} alt={episode.title} />
+			</div>
 
 			<div className="episode__meta">
 				<time className="episode__date" dateTime={episode.pubDate}>
-					{new Date(episode.pubDate).toLocaleDateString()}
+					{new Intl.DateTimeFormat('de-DE', {
+						day: '2-digit',
+						month: '2-digit',
+						year: 'numeric',
+					}).format(new Date(episode.pubDate))}
 				</time>
 				{episode.duration && (
 					<span className="episode__duration">
@@ -93,7 +95,7 @@ export default function Episode() {
 
 			<div
 				className="episode__description"
-				dangerouslySetInnerHTML={{ __html: episode.description }}
+				dangerouslySetInnerHTML={{ __html: episode.contentEncoded }}
 			/>
 
 			<div className="episode__links">

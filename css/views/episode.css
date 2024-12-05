@@ -16,21 +16,20 @@
 }
 
 .episode__back-link {
-	color: var(--color-text-light);
+	color: var(--off-white);
 	display: inline-block;
 	margin-bottom: var(--space-sm);
 	text-decoration: none;
-	transition: color 0.2s ease;
-}
+	transition: color 0.3s ease;
 
-.episode__back-link:focus,
-.episode__back-link:hover {
-	color: var(--color-text);
-	text-decoration: underline;
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline;
+	}
 }
 
 .episode__date {
-	color: var(--color-text-light);
+	color: var(--blue);
 	font-size: 0.9rem;
 }
 
