@@ -1,9 +1,16 @@
-a {
-	color: var(--link-color);
-	text-decoration-thickness: 0.1em;
+.nav {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.nav__link {
+	color: var(--off-white);
+	text-decoration: none;
+
 	&:hover,
 	&:focus-visible {
-		color: var(--link-color-active);
+		text-decoration: underline;
 		text-decoration-thickness: 0.15em;
 	}
 }
