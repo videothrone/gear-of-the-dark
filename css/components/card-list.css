@@ -1,3 +1,12 @@
+.card-list {
+	margin-top: 3rem;
+}
+
 .card-list__items {
-	list-style: none;
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+	list-style-type: none;
+	margin-left: 0;
+	padding: 0;
 }

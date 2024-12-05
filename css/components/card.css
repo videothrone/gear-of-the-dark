@@ -1,13 +1,95 @@
-.card__play-button {
-	margin-top: 1rem;
-	padding: 0.5rem 1rem;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
+.card {
+	--color-background: var(--off-white);
+	--color-border: var(--off-white);
+	--color-primary-hover: #0056b3;
+	--color-text-secondary: var(--blue);
+	--font-size-base: 1rem;
+	--font-size-small: 0.9rem;
+	--font-size-title: 1.2rem;
+	--spacing-small: 0.5rem;
+	--spacing-medium: 1rem;
+
+	background-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+		linear-gradient(
+			-40deg,
+			rgba(222, 51, 51, 1) 0%,
+			rgba(118, 32, 32, 1) 15%,
+			rgba(14, 14, 14, 0.8) 30%,
+			rgba(14, 14, 14, 0.8) 70%,
+			rgba(34, 116, 118, 1) 85%,
+			rgba(54, 218, 221, 1) 100%
+		);
+	border: 3px solid var(--color-border);
+	border-radius: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
 }
 
-.card__play-button:hover {
-	background-color: #0056b3;
+.card__content {
+	padding: var(--spacing-medium);
+}
+
+.card__date {
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-small);
+	font-style: italic;
+	margin-bottom: var(--spacing-small);
+}
+
+.card__description {
+	font-size: var(--font-size-base);
+}
+
+.card__image {
+	height: 100%;
+	left: 0;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.card__image-container {
+	aspect-ratio: 1/1;
+	position: relative;
+	width: 100%;
+}
+
+.card__play-button {
+	align-items: center;
+	background-color: var(--blue);
+	border: none;
+	border-radius: 50%;
+	bottom: 10px;
+	color: var(--off-white);
+	cursor: pointer;
+	display: flex;
+	height: 40px;
+	justify-content: center;
+	left: 10px;
+	position: absolute;
+	transition: background-color 0.3s ease;
+	width: 40px;
+}
+
+.card__play-icon {
+	margin: -0.1rem -0.2rem 0 0;
+	min-width: 2rem;
+}
+
+.card__title {
+	font-size: var(--font-size-title);
+	margin: 0 0 var(--spacing-small) 0;
+}
+
+.card__title a {
+	color: var(--off-white);
+	text-decoration: none;
+}
+
+.card__title a:hover {
+	text-decoration: underline;
 }
