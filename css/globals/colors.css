@@ -8,16 +8,17 @@
 	*/
 	--red: var(--red-8);
 	--green: var(--lime-10);
-	--blue: var(--indigo-11);
-	--pink: var(--pink-8);
+	--blue: #36dadd;
+	--pink: #de3333;
+
 	/* Fast schwarz oder weiß. Texte mit vollem Schwarz-Weiß-Kontrast
 	sind schwerer zu lesen also welche mit leicht reduziertem Kontrast. */
 	--off-white: var(--gray-1);
 	--off-black: var(--gray-11);
 	/*  Variablennamen zum Beschreiben der Funktion */
-	--body-background: var(--off-white);
+	--body-background: var(--off-black);
 
-	--text-color: var(--off-black);
+	--text-color: var(--off-white);
 	--heading-color: var(--blue);
 	--link-color: var(--pink);
 	--link-color-active: var(--blue);
