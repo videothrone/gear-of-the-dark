@@ -125,6 +125,11 @@ export default function AudioPlayer({
 		<div
 			className={`audio-player ${isMinimized ? 'audio-player--minimized' : ''}`}
 		>
+			<img
+				src={episode.episodeImage}
+				alt={episode.title}
+				className="audio-player__image"
+			/>
 			<div className="audio-player__content">
 				<h3 className="audio-player__title">{episode.title}</h3>
 				<div className="audio-player__header-buttons">
