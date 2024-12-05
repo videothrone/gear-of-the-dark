@@ -12,7 +12,7 @@ export default function FilterControls({
 			<div className="filter-controls__search-wrapper">
 				<label
 					htmlFor="search"
-					className="filter-controls__search-label sr-only"
+					className="filter-controls__search-label visually-hidden"
 				>
 					Episoden durchsuchen
 				</label>
@@ -28,7 +28,10 @@ export default function FilterControls({
 			</div>
 
 			<div className="filter-controls__sort-wrapper">
-				<label htmlFor="sort" className="filter-controls__sort-label">
+				<label
+					htmlFor="sort"
+					className="filter-controls__sort-label visually-hidden"
+				>
 					Sortierung
 				</label>
 				<select

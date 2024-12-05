@@ -35,10 +35,11 @@
 .filter-controls__search {
 	border-radius: var(--control-border-radius);
 	border: 1px solid var(--control-border-color);
+	color: var(--off-black) !important;
 	font-size: var(--control-font-size);
 	height: var(--control-height);
 	padding: 0 var(--control-padding) 0
-		calc(var(--control-padding) * 2 + var(--icon-size));
+		calc(var(--control-padding) * 2 + var(--icon-size)) !important;
 	width: 100%;
 }
 
