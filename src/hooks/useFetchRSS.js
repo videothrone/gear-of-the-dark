@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
 export function useRssFeed(url) {
 	const [feedItems, setFeedItems] = useState([]);
@@ -8,36 +9,63 @@ export function useRssFeed(url) {
 	useEffect(() => {
 		const fetchFeed = async () => {
 			try {
+				// Check if the URL is valid
+				if (!/^https?:\/\//i.test(url)) {
+					throw new Error('Invalid URL scheme');
+				}
+
 				const response = await fetch(url);
+
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+
+				// Check if the content type is XML
+				const contentType = response.headers.get('Content-Type');
+				if (!contentType || !contentType.includes('xml')) {
+					throw new Error(`Invalid content type: ${contentType}`);
+				}
+
 				const text = await response.text();
 				const parser = new DOMParser();
 				const xmlDoc = parser.parseFromString(text, 'text/xml');
 
+				// Check if the XML is valid
+				if (xmlDoc.querySelector('parsererror')) {
+					throw new Error('Error parsing XML');
+				}
+
 				const items = xmlDoc.querySelectorAll('item');
 				const feedData = Array.from(items).map((item) => ({
-					title: item.querySelector('title')?.textContent || '',
+					title: DOMPurify.sanitize(
+						item.querySelector('title')?.textContent || ''
+					),
 					link: item.querySelector('link')?.textContent || '',
 					pubDate: item.querySelector('pubDate')?.textContent || '',
-					description: item.querySelector('description')?.textContent || '',
+					description: DOMPurify.sanitize(
+						item.querySelector('description')?.textContent || ''
+					),
 					guid: item.querySelector('guid')?.textContent || '',
 					enclosure: {
-						url: item.querySelector('enclosure')?.getAttribute('url') || '',
+						url: DOMPurify.sanitize(
+							item.querySelector('enclosure')?.getAttribute('url') || ''
+						),
 						type: item.querySelector('enclosure')?.getAttribute('type') || '',
 						length:
 							item.querySelector('enclosure')?.getAttribute('length') || '',
 					},
-					episodeImage:
+					episodeImage: DOMPurify.sanitize(
 						item.querySelector('itunes\\:image')?.getAttribute('href') ||
-						item.querySelector('[href]')?.getAttribute('href') ||
-						'',
-
+							item.querySelector('[href]')?.getAttribute('href') ||
+							''
+					),
 					duration: item.querySelector('itunes\\:duration')?.textContent || '',
 				}));
 
 				setFeedItems(feedData);
-			} catch (err) {
-				setError('Failed to fetch RSS feed');
-				console.error(err);
+			} catch (error) {
+				setError(`Failed to fetch RSS feed: ${error.message}`);
+				console.error(error);
 			} finally {
 				setIsLoading(false);
 			}
