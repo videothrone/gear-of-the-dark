@@ -60,6 +60,14 @@ export function useRssFeed(url) {
 							''
 					),
 					duration: item.querySelector('itunes\\:duration')?.textContent || '',
+					contentEncoded: DOMPurify.sanitize(
+						item.querySelector('content\\:encoded, encoded')?.textContent ||
+							item.getElementsByTagNameNS(
+								'http://purl.org/rss/1.0/modules/content/',
+								'encoded'
+							)[0]?.textContent ||
+							''
+					),
 				}));
 
 				setFeedItems(feedData);
