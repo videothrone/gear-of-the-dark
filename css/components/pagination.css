@@ -15,13 +15,19 @@
 }
 
 .pagination__button {
-	background-color: #f0f0f0;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+	color: var(--off-white);
 	cursor: pointer;
 	font-size: 1rem;
-	padding: 0.5rem 0.75rem;
-	transition: background-color 0.3s ease;
+	padding: 0;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--off-white) !important;
+		background-color: transparent !important;
+	}
 }
 
 .pagination__button:hover:not(:disabled) {
@@ -39,15 +45,4 @@
 
 .pagination__text {
 	font-size: 1rem;
-}
-
-@media (max-width: 600px) {
-	.pagination__button {
-		font-size: 0.875rem;
-		padding: 0.25rem 0.5rem;
-	}
-
-	.pagination__text {
-		font-size: 0.875rem;
-	}
 }
