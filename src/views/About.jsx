@@ -32,7 +32,7 @@ export default function About() {
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Facebook: facebook.com/gearofthedark
+							facebook.com/gearofthedark
 						</a>
 					</li>
 					<li>
