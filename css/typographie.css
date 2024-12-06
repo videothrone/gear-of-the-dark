@@ -1,10 +1,10 @@
 :root {
 	/* https://open-props.style/#typography */
-	--heading-font: var(--font-mono);
-	--body-font: var(--font-sans);
+	--heading-font: var(--font-transitional);
+	--body-font: var(--font-neo-grotesque);
 }
 
-/* 
+/*
 Fluide Schriftgrößen mit rem als Einheit, d.h. die tatsächliche Schriftgröße
 hängt davon ab, ob die User die Schriftgröße in den Browser-Einstellungen
 verändert (vergrößert) haben. Die Pixelwerte geben die Schriftgröße an, wenn
@@ -48,7 +48,7 @@ body {
   aber bei Bedarf eine h3 wie eine h2 aussehen zu lassen.
  @custom-selector ist ein sehr früher (Stage 1) Vorschlag für CSS, der
  mit PostCSS genutzt werden kann. (Für echte Projekte eventuell noch abwarten,
- bis das Feature in Stage 2 ist.)  
+ bis das Feature in Stage 2 ist.)
   */
 @custom-selector :--headings
 	h1,
