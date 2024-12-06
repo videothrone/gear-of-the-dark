@@ -182,7 +182,7 @@
 }
 
 .audio-player__speed-select {
-	background: transparent;
+	background: var(--off-black);
 	border: none;
 	color: var(--off-white);
 	font-size: 1rem;
