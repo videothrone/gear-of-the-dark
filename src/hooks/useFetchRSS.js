@@ -59,7 +59,10 @@ export function useRssFeed(url) {
 							item.querySelector('[href]')?.getAttribute('href') ||
 							''
 					),
-					duration: item.querySelector('itunes\\:duration')?.textContent || '',
+					duration:
+						item.querySelector('itunes\\:duration')?.textContent ||
+						item.querySelector('*|duration')?.textContent ||
+						'',
 					contentEncoded: DOMPurify.sanitize(
 						item.querySelector('content\\:encoded, encoded')?.textContent ||
 							item.getElementsByTagNameNS(
