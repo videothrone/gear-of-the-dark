@@ -1,3 +1,9 @@
+.home {
+	@media (max-width: 768px) {
+		padding: 0 1rem;
+	}
+}
+
 .home__link {
 	color: var(--off-white);
 	padding-bottom: 4rem;
