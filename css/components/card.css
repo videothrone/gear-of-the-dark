@@ -35,7 +35,6 @@
 .card__date {
 	color: var(--color-text-secondary);
 	font-size: var(--font-size-small);
-	font-style: italic;
 	margin-bottom: var(--spacing-small);
 }
 

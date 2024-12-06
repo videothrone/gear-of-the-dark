@@ -9,6 +9,24 @@ export default function Card({ item }) {
 
 	const isActive = activeEpisode && activeEpisode.guid === item.guid;
 
+	const formatDuration = (seconds) => {
+		const totalSeconds = parseInt(seconds, 10);
+
+		// If the duration is not a valid number, return '00:00'
+		if (isNaN(totalSeconds)) {
+			return '00:00';
+		}
+
+		const minutes = Math.floor(totalSeconds / 60);
+		const remainingSeconds = totalSeconds % 60;
+
+		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
+			.toString()
+			.padStart(2, '0')}`;
+	};
+
+	const duration = formatDuration(item.duration);
+
 	const handlePlay = () => {
 		if (isActive) {
 			if (isPlaying) {
@@ -57,6 +75,8 @@ export default function Card({ item }) {
 							year: 'numeric',
 						}).format(new Date(item.pubDate))}
 					</time>
+					<span> | </span>
+					{duration} min
 				</p>
 				<div
 					className="card__description"
