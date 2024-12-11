@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
+import validator from 'validator';
+import { fetchWithTimeout } from '../helpers/fetchWithTimeout';
 
 export function useRssFeed(url) {
 	const [feedItems, setFeedItems] = useState([]);
@@ -10,27 +12,43 @@ export function useRssFeed(url) {
 		const fetchFeed = async () => {
 			try {
 				// Check if the URL is valid
-				if (!/^https?:\/\//i.test(url)) {
-					throw new Error('Invalid URL scheme');
+				if (
+					!validator.isURL(url, {
+						protocols: ['http', 'https'],
+						require_protocol: true,
+					})
+				) {
+					throw new Error('Invalid URL');
 				}
 
-				const response = await fetch(url);
-
+				// Fetch the RSS feed
+				const response = await fetchWithTimeout(url, 5000);
 				if (!response.ok) {
 					throw new Error(`HTTP error! Status: ${response.status}`);
 				}
 
 				// Check if the content type is XML
 				const contentType = response.headers.get('Content-Type');
-				if (!contentType || !contentType.includes('xml')) {
+				if (
+					!contentType ||
+					!/^(application\/rss\+xml|application\/xml|text\/xml)/.test(
+						contentType.toLowerCase()
+					)
+				) {
 					throw new Error(`Invalid content type: ${contentType}`);
 				}
 
+				// Check if the XML is valid
 				const text = await response.text();
+				if (!/^<\?xml/.test(text)) {
+					throw new Error('Invalid XML content');
+				}
+
+				// Parse the XML
 				const parser = new DOMParser();
 				const xmlDoc = parser.parseFromString(text, 'text/xml');
 
-				// Check if the XML is valid
+				// Check if the XML is valid again
 				if (xmlDoc.querySelector('parsererror')) {
 					throw new Error('Error parsing XML');
 				}
@@ -40,29 +58,39 @@ export function useRssFeed(url) {
 					title: DOMPurify.sanitize(
 						item.querySelector('title')?.textContent || ''
 					),
-					link: item.querySelector('link')?.textContent || '',
-					pubDate: item.querySelector('pubDate')?.textContent || '',
+					link: DOMPurify.sanitize(
+						item.querySelector('link')?.textContent || ''
+					),
+					pubDate: DOMPurify.sanitize(
+						item.querySelector('pubDate')?.textContent || ''
+					),
 					description: DOMPurify.sanitize(
 						item.querySelector('description')?.textContent || ''
 					),
-					guid: item.querySelector('guid')?.textContent || '',
+					guid: DOMPurify.sanitize(
+						item.querySelector('guid')?.textContent || ''
+					),
 					enclosure: {
 						url: DOMPurify.sanitize(
 							item.querySelector('enclosure')?.getAttribute('url') || ''
 						),
-						type: item.querySelector('enclosure')?.getAttribute('type') || '',
-						length:
-							item.querySelector('enclosure')?.getAttribute('length') || '',
+						type: DOMPurify.sanitize(
+							item.querySelector('enclosure')?.getAttribute('type') || ''
+						),
+						length: DOMPurify.sanitize(
+							item.querySelector('enclosure')?.getAttribute('length') || ''
+						),
 					},
 					episodeImage: DOMPurify.sanitize(
 						item.querySelector('itunes\\:image')?.getAttribute('href') ||
 							item.querySelector('[href]')?.getAttribute('href') ||
 							''
 					),
-					duration:
+					duration: DOMPurify.sanitize(
 						item.querySelector('itunes\\:duration')?.textContent ||
-						item.querySelector('*|duration')?.textContent ||
-						'',
+							item.querySelector('*|duration')?.textContent ||
+							''
+					),
 					contentEncoded: DOMPurify.sanitize(
 						item.querySelector('content\\:encoded, encoded')?.textContent ||
 							item.getElementsByTagNameNS(
@@ -76,7 +104,7 @@ export function useRssFeed(url) {
 				setFeedItems(feedData);
 			} catch (error) {
 				setError(`Failed to fetch RSS feed: ${error.message}`);
-				console.error(error);
+				console.error('Fetch Error:', error);
 			} finally {
 				setIsLoading(false);
 			}
