@@ -260,40 +260,42 @@ export default function AudioPlayer({
 									<span>{formatTime(duration)}</span>
 								</div>
 							</div>
-							<div className="audio-player__speed">
-								<label htmlFor="speed" className="visually-hidden">
-									Geschwindigkeit:
-								</label>
-								<select
-									id="speed"
-									value={speed}
-									onChange={handleSpeedChange}
-									className="audio-player__speed-select"
-								>
-									<option value="0.5">0.5x</option>
-									<option value="1">1x</option>
-									<option value="1.5">1.5x</option>
-									<option value="2">2x</option>
-								</select>
-							</div>
-							<div className="audio-player__volume">
-								<button
-									className="audio-player__volume-button"
-									onClick={toggleMute}
-									aria-label={isMuted ? 'Stummschalten' : 'Stummgeschaltet'}
-								>
-									{isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-								</button>
-								<input
-									type="range"
-									id="volume"
-									min="0"
-									max="1"
-									step="0.1"
-									value={isMuted ? 0 : volume}
-									onChange={handleVolumeChange}
-									className="audio-player__volume-slider"
-								/>
+							<div className="audio-player__sound">
+								<div className="audio-player__speed">
+									<label htmlFor="speed" className="visually-hidden">
+										Geschwindigkeit:
+									</label>
+									<select
+										id="speed"
+										value={speed}
+										onChange={handleSpeedChange}
+										className="audio-player__speed-select"
+									>
+										<option value="0.5">0.5x</option>
+										<option value="1">1x</option>
+										<option value="1.5">1.5x</option>
+										<option value="2">2x</option>
+									</select>
+								</div>
+								<div className="audio-player__volume">
+									<button
+										className="audio-player__volume-button"
+										onClick={toggleMute}
+										aria-label={isMuted ? 'Stummschalten' : 'Stummgeschaltet'}
+									>
+										{isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+									</button>
+									<input
+										type="range"
+										id="volume"
+										min="0"
+										max="1"
+										step="0.1"
+										value={isMuted ? 0 : volume}
+										onChange={handleVolumeChange}
+										className="audio-player__volume-slider"
+									/>
+								</div>
 							</div>
 						</>
 					)}
