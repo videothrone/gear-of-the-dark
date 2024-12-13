@@ -32,7 +32,7 @@ export default function Archive() {
 
 	return (
 		<section className="archive" aria-labelledby="archive__title">
-			<h1 className="archive__title">Podcast Archiv</h1>
+			<h1 className="archive__title">Episoden Archiv</h1>
 			<FilterControls
 				searchValue={searchInput}
 				onSearchChange={handleSearch}
