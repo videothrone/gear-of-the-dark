@@ -3,6 +3,7 @@ import { useRssFeed } from '../hooks/useFetchRSS.js';
 import Card from './Card.jsx';
 import AudioPlayer from './AudioPlayer.jsx';
 import Pagination from './Pagination.jsx';
+import Loader from './Loader.jsx';
 
 export default function CardList({
 	limit,
@@ -79,7 +80,11 @@ export default function CardList({
 	};
 
 	if (isLoading) {
-		return <div aria-live="polite">Loading...</div>;
+		return (
+			<div aria-live="polite">
+				<Loader />
+			</div>
+		);
 	}
 
 	if (error) {
