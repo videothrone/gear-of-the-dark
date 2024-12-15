@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { useRssFeed } from '../hooks/useFetchRSS';
 import { AudioContext } from '../contexts/audioContext';
 import { FaDownload, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa';
+import { formatDuration } from '../helpers/formatDuration';
+import Loader from '../components/Loader';
 
 export default function Episode() {
 	const { guid } = useParams();
@@ -15,7 +17,7 @@ export default function Episode() {
 	if (isLoading) {
 		return (
 			<div className="episode episode--loading" aria-live="polite">
-				Loading...
+				<Loader />
 			</div>
 		);
 	}
@@ -39,6 +41,7 @@ export default function Episode() {
 	}
 
 	const isActive = activeEpisode && activeEpisode.guid === episode.guid;
+	const duration = formatDuration(episode.duration);
 
 	const handlePlay = () => {
 		if (isActive) {
@@ -51,24 +54,6 @@ export default function Episode() {
 			onPlay(episode);
 		}
 	};
-
-	const formatDuration = (seconds) => {
-		const totalSeconds = parseInt(seconds, 10);
-
-		// If the duration is not a valid number, return '00:00'
-		if (isNaN(totalSeconds)) {
-			return '00:00';
-		}
-
-		const minutes = Math.floor(totalSeconds / 60);
-		const remainingSeconds = totalSeconds % 60;
-
-		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
-			.toString()
-			.padStart(2, '0')}`;
-	};
-
-	const duration = formatDuration(episode.duration);
 
 	return (
 		<article className="episode" aria-labelledby="episode-title">
@@ -115,7 +100,7 @@ export default function Episode() {
 						<FaExternalLinkAlt /> Zur Episode auf Podigee
 					</a>
 					<a
-						href={episode.enclosureUrl}
+						href={episode.enclosure.url}
 						download
 						className="episode__download-link"
 					>

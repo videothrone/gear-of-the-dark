@@ -2,29 +2,13 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AudioContext } from '../contexts/audioContext';
 import { FaPlay, FaPause } from 'react-icons/fa';
+import { formatDuration } from '../helpers/formatDuration';
 
 export default function Card({ item }) {
 	const { activeEpisode, isPlaying, onPlay, onPause, onResume } =
 		useContext(AudioContext);
 
 	const isActive = activeEpisode && activeEpisode.guid === item.guid;
-
-	const formatDuration = (seconds) => {
-		const totalSeconds = parseInt(seconds, 10);
-
-		// If the duration is not a valid number, return '00:00'
-		if (isNaN(totalSeconds)) {
-			return '00:00';
-		}
-
-		const minutes = Math.floor(totalSeconds / 60);
-		const remainingSeconds = totalSeconds % 60;
-
-		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
-			.toString()
-			.padStart(2, '0')}`;
-	};
-
 	const duration = formatDuration(item.duration);
 
 	const handlePlay = () => {
