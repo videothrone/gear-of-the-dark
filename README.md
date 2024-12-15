@@ -1,6 +1,11 @@
 # Gear of the Dark
 
-SPA dashboard built in React for the podcast [Gear of the Dark](https://gearofthedark.podigee.io/), including a native audio player for listening and an archive with rudimentary sorting and search.
+An overview website built in React for the podcast [Gear of the Dark](https://gearofthedark.podigee.io/), including a native audio player for listening and an archive with rudimentary sorting and search.
+
+This project was initially my final project for a [React](https://react.dev) course at [CimData](https://www.cimdata.de/weiterbildung/programmieren-mit-javascript-framework-react/) done in about 4 days. The boilerplate behind it was provided, though I'll change and adjust the project incrementally to my liking as I work on it.
+
+## Live
+https://gear-of-the-dark.netlify.app
 
 ## Deployment Status
 
@@ -18,4 +23,3 @@ Run the development server:
 ```bash
 npm run dev
 ```
-
