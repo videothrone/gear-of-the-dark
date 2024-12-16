@@ -13,6 +13,11 @@ https://gear-of-the-dark.netlify.app
 
 ## Getting Started (locally)
 
+Add local `.env` file, with the following:
+```
+REACT_APP_RSS_FEED_URL=https://gearofthedark.podigee.io/feed/mp3
+```
+
 Install NPM packages:
 ```bash
 npm i
