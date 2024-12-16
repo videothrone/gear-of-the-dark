@@ -1,0 +1,30 @@
+:root {
+	--color-error-background: #fff3f3;
+	--color-error-border: #ffcccb;
+	--color-error-text: #d8000c;
+	--border-radius: 0.25rem;
+	--spacing-small: 0.25rem;
+	--spacing-medium: 1rem;
+	--spacing-large: 1.5rem;
+	--font-size-normal: 1rem;
+}
+
+.error-message {
+	background-color: var(--color-error-background);
+	border: 0.0625rem solid var(--color-error-border);
+	border-radius: var(--border-radius);
+	margin: var(--spacing-medium) 0;
+	padding: var(--spacing-medium);
+}
+
+.error-message__content {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.error-message__text {
+	color: var(--color-error-text);
+	margin-bottom: var(--spacing-medium);
+	text-align: center;
+}
