@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Cookies from 'js-cookie';
 import {
 	FaCaretDown,
@@ -27,6 +27,20 @@ export default function AudioPlayer({
 	const [isMuted, setIsMuted] = useState(false);
 	const audioRef = useRef(null);
 
+	const togglePlay = useCallback(() => {
+		if (isPlaying) {
+			onPause();
+		} else {
+			onPlay();
+		}
+	}, [isPlaying, onPause, onPlay]);
+
+	const skip = useCallback((seconds) => {
+		if (audioRef.current) {
+			audioRef.current.currentTime += seconds;
+		}
+	}, []);
+
 	const getAudioUrl = (episode) => {
 		if (episode.enclosure && episode.enclosure.url) {
 			return episode.enclosure.url;
@@ -39,12 +53,6 @@ export default function AudioPlayer({
 
 	const toggleMinimize = () => {
 		setIsMinimized(!isMinimized);
-	};
-
-	const skip = (seconds) => {
-		if (audioRef.current) {
-			audioRef.current.currentTime += seconds;
-		}
 	};
 
 	const formatTime = (time) => {
@@ -90,7 +98,11 @@ export default function AudioPlayer({
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (audioRef.current && isPlaying) {
-				Cookies.set(`audioTime-${episode.guid}`, audioRef.current.currentTime);
+				Cookies.set(`audioTime-${episode.guid}`, audioRef.current.currentTime, {
+					secure: true,
+					sameSite: 'strict',
+					path: '/',
+				});
 			}
 		}, 5000);
 
@@ -101,23 +113,19 @@ export default function AudioPlayer({
 		const handleKeyDown = (event) => {
 			if (event.key === 'Escape') {
 				onClose();
+			} else if (event.key === ' ' || event.key === 'k') {
+				event.preventDefault(); // Prevent default spacebar behavior
+				togglePlay();
+			} else if (event.key === 'ArrowLeft') {
+				skip(-30);
+			} else if (event.key === 'ArrowRight') {
+				skip(30);
 			}
 		};
 
 		document.addEventListener('keydown', handleKeyDown);
-
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown);
-		};
-	}, [onClose]);
-
-	const togglePlay = () => {
-		if (isPlaying) {
-			onPause();
-		} else {
-			onPlay();
-		}
-	};
+		return () => document.removeEventListener('keydown', handleKeyDown);
+	}, [onClose, togglePlay, skip]);
 
 	const handleVolumeChange = (e) => {
 		const newVolume = parseFloat(e.target.value);
@@ -204,6 +212,7 @@ export default function AudioPlayer({
 						src={audioUrl}
 						onTimeUpdate={handleTimeUpdate}
 						onLoadedMetadata={handleLoadedMetadata}
+						onError={(e) => console.error('Audio-Error:', e)}
 					>
 						<track kind="captions" src="" label="Untertitel" />
 					</audio>
@@ -285,6 +294,9 @@ export default function AudioPlayer({
 									>
 										{isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
 									</button>
+									<label htmlFor="volume" className="visually-hidden">
+										Lautstärke:
+									</label>
 									<input
 										type="range"
 										id="volume"
