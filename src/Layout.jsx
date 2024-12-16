@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import AudioPlayer from './components/AudioPlayer';
 import { AudioContext } from './contexts/audioContext';
@@ -7,20 +7,25 @@ export default function Layout() {
 	const [activeEpisode, setActiveEpisode] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	const handlePlay = (episode) => {
+	const handlePlay = useCallback((episode) => {
 		setActiveEpisode(episode);
 		setIsPlaying(true);
-	};
+	}, []);
 
-	const handlePause = () => {
+	const handlePause = useCallback(() => {
 		setIsPlaying(false);
-	};
+	}, []);
 
-	const handleResume = () => {
+	const handleResume = useCallback(() => {
 		setIsPlaying(true);
-	};
+	}, []);
 
-	// Context Provider für die Audio-Funktionen
+	const handleClose = useCallback(() => {
+		setActiveEpisode(null);
+		setIsPlaying(false);
+	}, []);
+
+	// Context provider for AudioPlayer
 	const audioContext = {
 		activeEpisode,
 		isPlaying,
@@ -36,7 +41,7 @@ export default function Layout() {
 				{activeEpisode && (
 					<AudioPlayer
 						episode={activeEpisode}
-						onClose={() => setActiveEpisode(null)}
+						onClose={handleClose}
 						autoPlay={true}
 						isPlaying={isPlaying}
 						onPause={handlePause}
