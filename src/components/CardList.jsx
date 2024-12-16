@@ -4,6 +4,9 @@ import Card from './Card.jsx';
 import AudioPlayer from './AudioPlayer.jsx';
 import Pagination from './Pagination.jsx';
 import Loader from './Loader.jsx';
+import ErrorMessage from './ErrorMessage.jsx';
+
+const RSS_FEED_URL = import.meta.env.VITE_RSS_FEED_URL;
 
 export default function CardList({
 	limit,
@@ -13,9 +16,7 @@ export default function CardList({
 	sortOrder = 'newest',
 	onSearchResults = () => {},
 }) {
-	const { feedItems, isLoading, error } = useRssFeed(
-		'https://gearofthedark.podigee.io/feed/mp3'
-	);
+	const { feedItems, isLoading, error } = useRssFeed(RSS_FEED_URL);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeEpisode, setActiveEpisode] = useState(null);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -88,7 +89,11 @@ export default function CardList({
 	}
 
 	if (error) {
-		return <div aria-live="assertive">Error: {error}</div>;
+		return (
+			<section className="card-list">
+				<ErrorMessage message="Es gab ein Problem beim Laden der Podcast-Episoden. Bitte versuchen Sie es später erneut." />
+			</section>
+		);
 	}
 
 	return (
