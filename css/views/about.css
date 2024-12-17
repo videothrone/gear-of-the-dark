@@ -1,0 +1,42 @@
+.about {
+	margin-bottom: 4rem;
+}
+
+.about__content {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	@media (min-width: 768px) {
+		align-items: stretch;
+		flex-direction: row;
+	}
+}
+
+.about__image {
+	align-self: flex-start;
+	max-height: 40rem;
+	object-fit: contain;
+	width: 100%;
+
+	@media (min-width: 768px) {
+		height: auto;
+		max-width: 50%;
+		object-fit: cover;
+	}
+}
+
+.about__text {
+	flex: 1;
+}
+
+.about__text p:first-of-type {
+	margin-top: 0;
+}
+
+.about__social-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
