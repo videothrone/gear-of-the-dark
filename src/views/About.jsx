@@ -26,8 +26,20 @@ export default function About() {
 						Und all das ausgerechnet aus Liebe. Aus Liebe zur Musik. Von
 						Musikern für Musiker und alle die es werden woll(t)en...
 					</p>
-
-					<p>Präsentiert von ESP Guitars.</p>
+					<div className="about__logo-wrapper">
+						<p className="about__logo-text">Präsentiert von</p>
+						<a
+							href="https://www.espguitars.com"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								src="/img/ESP_Logo.svg"
+								alt="ESP Guitars"
+								className="about__logo"
+							/>
+						</a>
+					</div>
 
 					<div className="about__social-links">
 						<h2>Folgt uns auf:</h2>
