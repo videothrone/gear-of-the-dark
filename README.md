@@ -16,6 +16,7 @@ https://gear-of-the-dark.netlify.app
 Add local `.env` file, with the following:
 ```
 VITE_RSS_FEED_URL=https://gearofthedark.podigee.io/feed/mp3
+VITE_YT_API_KEY=yourYouTubeDataAPIv3Key
 ```
 
 Install NPM packages:
