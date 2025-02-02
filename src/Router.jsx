@@ -5,6 +5,7 @@ import About from './views/About';
 import Archive from './views/Archive';
 import Episode from './views/Episode';
 import NotFound from './views/NotFound';
+import Videos from './views/Videos';
 
 export default function Router() {
 	return (
@@ -13,6 +14,7 @@ export default function Router() {
 				<Route path="/" element={<Home />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/archive" element={<Archive />} />
+				<Route path="/videos" element={<Videos />} />
 				<Route path="/episode/:guid" element={<Episode />} />
 				<Route path="*" element={<NotFound />} />
 			</Route>

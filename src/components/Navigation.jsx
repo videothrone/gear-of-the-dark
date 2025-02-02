@@ -9,6 +9,9 @@ export default function Navigation() {
 			<Link to="/archive" className="nav__link">
 				Alle Episoden
 			</Link>
+			<Link to="/videos" className="nav__link">
+				Video Podcasts
+			</Link>
 			<Link to="/about" className="nav__link">
 				Über den Podcast
 			</Link>
