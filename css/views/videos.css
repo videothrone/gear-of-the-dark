@@ -1,13 +1,13 @@
 :root {
-	--spacing-large: 1.25rem; /* 20px */
-	--spacing-medium: 0.9375rem; /* 15px */
-	--font-size-title: 1.5rem; /* 24px */
-	--font-size-text: 1.125rem; /* 18px */
-	--font-size-error: 1.125rem; /* 18px */
+	--spacing-large: 1.25rem;
+	--spacing-medium: 0.9375rem;
+	--font-size-title: 1.5rem;
+	--font-size-text: 1.125rem;
+	--font-size-error: 1.125rem
 	--color-text: white;
 	--color-error: red;
-	--border-radius: 0.5rem; /* 8px */
-	--max-width-container: 50rem; /* 800px */
+	--border-radius: 0.5rem;
+	--max-width-container: 50rem;
 }
 
 .videos {
