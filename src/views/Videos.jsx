@@ -26,7 +26,7 @@ export default function Videos() {
 
 				setVideos(response.data.items);
 			} catch (error) {
-				console.log(error);
+				console.log('Error fetching videos:', error);
 				setError(
 					'Fehler beim Laden der Videos. Bitte versuche es später erneut.'
 				);
