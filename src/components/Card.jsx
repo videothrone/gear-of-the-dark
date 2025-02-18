@@ -26,7 +26,12 @@ export default function Card({ item }) {
 	return (
 		<article className="card">
 			<div className="card__image-container">
-				<img src={item.episodeImage} alt={item.title} className="card__image" />
+				<img
+					src={item.episodeImage}
+					alt={item.title}
+					className="card__image"
+					loading="lazy"
+				/>
 				<button
 					className="card__play-button"
 					onClick={handlePlay}
