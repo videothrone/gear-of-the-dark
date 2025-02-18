@@ -1,2 +1,0 @@
-/*
-  Content-Security-Policy: default-src 'self'; img-src 'self' https://images.podigee-cdn.net https://main.podigee-cdn.net; media-src 'self' https:;
