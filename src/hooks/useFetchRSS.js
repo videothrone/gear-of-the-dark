@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 import validator from 'validator';
 import { fetchWithTimeout } from '../helpers/fetchWithTimeout';
+import { sanitizeImageUrl } from '../helpers/sanitizeImageUrl';
 
 export function useRssFeed(url) {
 	const [feedItems, setFeedItems] = useState([]);
@@ -81,10 +82,12 @@ export function useRssFeed(url) {
 							item.querySelector('enclosure')?.getAttribute('length') || ''
 						),
 					},
-					episodeImage: DOMPurify.sanitize(
-						item.querySelector('itunes\\:image')?.getAttribute('href') ||
-							item.querySelector('[href]')?.getAttribute('href') ||
-							''
+					episodeImage: sanitizeImageUrl(
+						DOMPurify.sanitize(
+							item.querySelector('itunes\\:image')?.getAttribute('href') ||
+								item.querySelector('[href]')?.getAttribute('href') ||
+								''
+						)
 					),
 					duration: DOMPurify.sanitize(
 						item.querySelector('itunes\\:duration')?.textContent ||
